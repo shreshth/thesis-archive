@@ -1,0 +1,26 @@
+<resources>
+
+    <string name="app_name">IW</string>
+    <string name="title_activity_main">IWTabActivity</string>
+
+    <!-- Settings -->
+    <string name="menu_settings">Settings</string>
+
+    <!-- Tab names -->
+    <string name="tab_app">Apps</string>
+    <string name="tab_location">Wifi locations</string>
+
+    <!-- Location Activity -->
+    <string name="num_points">Number of data points collected:</string>    
+    <string name="get_pred">Get predictions from Server</string>
+    
+    <!-- Location Activity & App Activity - shared -->
+    <string name="send_points">Send data points to Server</string>
+    <string name="service_running">Stop collecting data points</string>
+    <string name="service_not_running">Start collecting data points</string>
+    
+    <!-- Dialogs -->
+    <string name="sending">Sending&#8230;</string>
+    <string name="hide">Hide</string>
+
+</resources>

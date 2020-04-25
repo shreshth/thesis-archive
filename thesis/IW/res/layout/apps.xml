@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent" 
+              android:layout_height="fill_parent" 
+              android:orientation="vertical" >                 
+    
+    <!-- Send data points to server -->
+    <Button android:id="@+id/networkstats_send_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="@string/send_points"/>
+    
+    <!-- Start/Stop collecting data points -->
+    <Button android:id="@+id/networkstats_service_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_above="@id/networkstats_send_button"
+            android:text="@string/service_not_running"/>
+    
+    <!-- Get predictions from server -->
+    <Button android:id="@+id/networkstats_get_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"     
+            android:layout_below="@id/networkstats_send_button"       
+            android:text="@string/get_pred"/>
+    
+    <!-- Number of data points collected -->
+    <TextView android:id="@+id/networkstats_num_rows"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+    		  android:layout_centerHorizontal="true"
+    		  android:layout_above="@id/networkstats_service_button"/>
+    <TextView android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_centerHorizontal="true"
+    		  android:layout_above="@id/networkstats_num_rows"
+              android:text="@string/num_points"/>
+    
+</RelativeLayout>

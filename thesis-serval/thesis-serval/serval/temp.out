@@ -1,0 +1,67 @@
+################################################## 
+ 
+diff --git a/src/stack/serval_tcp.c b/src/stack/serval_tcp.c
+index f4500f4..55a111c 100644
+--- a/src/stack/serval_tcp.c
++++ b/src/stack/serval_tcp.c
+@@ -2510,6 +2510,37 @@ static int serval_tcp_migration_completed(struct sock *sk)
+         return 0;
+ }
+
+ static struct serval_sock_af_ops serval_tcp_af_ops = {
+         .queue_xmit = serval_ipv4_xmit,
+         .receive = serval_tcp_rcv,
+@@ -2526,6 +2557,8 @@ static struct serval_sock_af_ops serval_tcp_af_ops = {
+         .conn_child_sock = serval_tcp_syn_recv_sock,
+         .freeze_flow = serval_tcp_freeze_flow, 
+         .migration_completed = serval_tcp_migration_completed,
++	/* obilgir: set the unpause action */
++	.unpause = serval_tcp_unpause,
+         .send_shutdown = serval_sal_send_shutdown,
+         .recv_shutdown = serval_sal_recv_shutdown,
+         .done = __serval_tcp_done,
+@@ -2547,6 +2580,8 @@ static struct serval_sock_af_ops serval_tcp_encap_af_ops = {
+         .respond_state_process = serval_tcp_syn_recv_state_process,
+         .conn_child_sock = serval_tcp_syn_recv_sock,
+         .migration_completed = serval_tcp_migration_completed,
++	/* obilgir: set the unpause action */
++	.unpause = serval_tcp_unpause,
+         .freeze_flow = serval_tcp_freeze_flow,
+         .send_shutdown = serval_sal_send_shutdown,
+         .recv_shutdown = serval_sal_recv_shutdown,
+ 		
+ 
+
+
+##################################################
+
+diff --git a/src/translator/translator.c b/src/translator/translator.c
+index ac73dc9..9582787 100644
+--- a/src/translator/translator.c
++++ b/src/translator/translator.c
+@@ -116,7 +116,7 @@ static enum work_status work_translate(struct socket *from,
+                                        int splicefd[2])
+ {
+         ssize_t ret;
+-        size_t readlen, nbytes;
++        size_t readlen, nbytes = 0;
+         enum work_status status = WORK_OK;
+         int bytes_queued = 0;
+         
+@@ -127,7 +127,7 @@ static enum work_status work_translate(struct socket *from,
+                 return WORK_ERROR;
+         }
+ 
+-        readlen = from->sndbuf - bytes_queued;
++        readlen = to->sndbuf - bytes_queued;
+         
+         if (readlen == 0)
+                 return WORK_NOSPACE;
+@@ -175,7 +175,6 @@ static enum work_status work_translate(struct socket *from,
+                         readlen -= ret;
+                 }
+         }
+-        
+         /* LOG_DBG("splice2 %zu bytes\n", nbytes); */
+         
+         return status;

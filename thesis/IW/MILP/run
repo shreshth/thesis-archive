@@ -1,0 +1,12 @@
+reset
+model ./general.mod;
+data  ./general.dat;
+option cplex_options 'mipdisplay=2' 'timelimit=600' 'clocktype=1';
+solve;
+display bytesTotal;
+display sizeSmall;
+display header;
+display time;
+display isChannelWifi;
+display channelScheduled;
+display seq;

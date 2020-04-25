@@ -1,0 +1,53 @@
+application: droidtndata
+version: 1
+runtime: python
+api_version: 1
+
+builtins:
+- remote_api: on
+
+handlers:
+- url: /favicon.ico
+  static_files: images/favicon.ico
+  upload: images/favicon.ico
+
+- url: /pred.txt
+  static_files: pred.txt
+  upload: pred.txt
+
+- url: /js
+  static_dir: js
+
+- url: /css
+  static_dir: css
+
+- url: /images
+  static_dir: images
+
+- url: /
+  script: home.py
+
+- url: /add_data_location
+  script: add_data_location.py
+  
+- url: /add_data_app
+  script: add_data_app.py
+
+- url: /map
+  script: map.py
+  login: admin
+
+- url: /apps
+  script: apps.py
+  login: admin
+
+- url: /data.txt
+  script: data.py
+  login: admin
+
+- url: /learn
+  script: ai.py
+  login: admin
+
+- url: /predict
+  script: ai.py

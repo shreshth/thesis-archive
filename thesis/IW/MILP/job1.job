@@ -1,0 +1,8 @@
+# serial job using 1 node and 1 processor, and runs
+# for 11 hours (max).
+PBS -l nodes=1:ppn=1,walltime=00:59:59
+PBS -d ./out
+cd .
+time /usr/licensed/bin/ampl run
+
+

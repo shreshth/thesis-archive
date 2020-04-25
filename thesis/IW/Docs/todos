@@ -1,0 +1,25 @@
+1. AppActivity generates too much data. Instead of storing network usage stats every 5 
+seconds regardless of whether or not anything new has happened, only store if 
+an app has done something new.
+Basically, have a separate table - for each app, only store the last seen value. Then
+whenever you're going to add a new value, first check if it's any different from
+the last seen value for the app - add only if different (also update last seen value
+if different).
+
+Pros: Will reduce amount of data stored dramatically
+Cons: Require 1 db access (1 read) if nothing has changed, and 3 (1 read + 2 writes)
+db accesses if something has changed.
+
+_______________________
+
+2. Need better metric to measure wifi quality than just signal strength. RSSI is not 
+the best metric.
+
+Need to do more reading for this.
+
+_______________________
+
+3. Collaborative connection to multiple wifi APs
+
+Need to do more reading for this.
+
